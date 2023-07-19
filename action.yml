@@ -1,0 +1,25 @@
+name: Github build stats
+description: "Get Build Stats in GitHub Actions workflow."
+branding:
+  icon: check-circle
+  color: green
+inputs:
+  GITHUB_TOKEN:
+    description: 'Github token to access the build stats. repo access should be good enough '
+    required: true
+  GITHUB_ORG_ID:
+    description: 'The organization id where your repository is located. It might be your username, company name, etc'
+    required: true
+  GITHUB_REPOSITORY_ID:
+    description: 'The repo id that we with to get stats from its workflow'
+    required: true
+    default: ${{ github.repository_id }}
+  GITHUB_RUN_ID:
+    description: 'The run id\number that we wish to get stats from'
+    required: true
+    default: ${{ github.run_number }}
+
+
+runs:
+  using: "docker"
+  image: "docker://python:3.10.12"
