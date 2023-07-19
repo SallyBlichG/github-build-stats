@@ -19,8 +19,10 @@ inputs:
     required: true
     default: ${{ github.run_number }}
 
+outputs:
+  output:
+    description: "Output from the action"
 
 runs:
   using: "docker"
-  image: "docker://python:3.10.12"
-  main: "main.py"
+  image: "Dockerfile"
