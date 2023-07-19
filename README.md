@@ -1,1 +1,1 @@
-# github-build-stats
+# Github Build Stats
