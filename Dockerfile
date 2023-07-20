@@ -2,7 +2,7 @@ FROM python:3.10.3-alpine AS builder
 ADD . /app
 WORKDIR /app
 
-RUN apk add curl-dev python3-dev libressl-dev
+RUN apk add --no-cache curl-dev python3-dev libressl-dev gcc musl-dev
 RUN pip install --target=/app -r requirements.txt
 
 FROM gcr.io/distroless/python3-debian10
