@@ -38,7 +38,7 @@ runs:
           ref: 'main'
 
       - name: Install Dependencies
-        run: pip install --upgrade pip && pip install -r requirements.txt
+        run: cat /etc/os-release && pip install -r requirements.txt
         shell: bash
 
 #      - name: Pass Inputs to Shell
