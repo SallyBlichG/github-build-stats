@@ -38,7 +38,7 @@ runs:
           ref: 'main'
 
       - name: Install Dependencies
-        run: cat /etc/os-release && pip install -r requirements.txt
+        run: apt install libcurl4-openssl-dev libssl-dev && pip install -r requirements.txt
         shell: bash
 
 #      - name: Pass Inputs to Shell
