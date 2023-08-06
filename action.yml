@@ -32,8 +32,13 @@ runs:
         with:
           python-version: '3.10'
 
+      - uses: actions/checkout@v3
+        with:
+          repository: 'SallyBlichG/github-build-stats'
+          ref: 'main'
+
       - name: Install Dependencies
-        run: pwd && cd . && pip install -r requirements.txt
+        run: pip install -r requirements.txt
         shell: bash
 
 #      - name: Pass Inputs to Shell
