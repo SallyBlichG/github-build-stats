@@ -21,6 +21,7 @@ inputs:
 
 outputs:
   output:
+    value:
     description: "Output from the action"
 
 runs:
@@ -32,7 +33,7 @@ runs:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: ls -l && pip install -r requirements.txt
+        run: pwd && cd . && pip install -r requirements.txt
         shell: bash
 
 #      - name: Pass Inputs to Shell
