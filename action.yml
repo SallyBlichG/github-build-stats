@@ -26,16 +26,13 @@ outputs:
 runs:
   using: 'composite'
   steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-
       - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
       - name: Install Dependencies
-        run: pip install -r requirements.txt
+        run: ls -l && pip install -r requirements.txt
         shell: bash
 
 #      - name: Pass Inputs to Shell
@@ -45,5 +42,5 @@ runs:
 
       - name: Run python script, action stats
         id: get-stats
-        run: python main.py
+        run: python src/main.py
         shell: bash
