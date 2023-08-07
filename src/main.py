@@ -2,7 +2,6 @@ import http.client
 import json
 from datetime import datetime
 import os
-import logging
 
 
 def main():
