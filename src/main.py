@@ -15,7 +15,7 @@ def main():
             'User-Agent': 'github-build-stats/1.0'
         }
         conn.request("GET",
-                     f"/repos/{os.getenv('GITHUB_ORG_ID')}/{os.getenv('GITHUB_REPOSITORY_ID')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}/jobs",
+                     f"/repos/{os.getenv('GITHUB_ORG_ID')}/{os.getenv('GITHUB_REPOSITORY_NAME')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}/jobs",
                      payload, headers)
         res = conn.getresponse()
         print(res)

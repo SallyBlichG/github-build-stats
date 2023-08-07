@@ -10,8 +10,8 @@ inputs:
   GITHUB_ORG_ID:
     description: 'The organization id where your repository is located. It might be your username, company name, etc'
     required: true
-  GITHUB_REPOSITORY_ID:
-    description: 'The repo id that we with to get stats from its workflow'
+  GITHUB_REPOSITORY_NAME:
+    description: 'The repo name that we with to get stats from its workflow'
     required: true
     default: ${{ github.event.repository.name }}
   GITHUB_RUN_ID:
@@ -44,7 +44,7 @@ runs:
       - name: Pass Inputs to Shell
         run: |
           echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
-          echo "GITHUB_REPOSITORY_ID=${{ inputs.GITHUB_REPOSITORY_ID }}" >> $GITHUB_ENV
+          echo "GITHUB_REPOSITORY_NAME=${{ inputs.GITHUB_REPOSITORY_NAME }}" >> $GITHUB_ENV
           echo "GITHUB_RUN_ID=${{ inputs.GITHUB_RUN_ID }}" >> $GITHUB_ENV
           echo "GITHUB_ORG_ID=${{ inputs.GITHUB_ORG_ID }}" >> $GITHUB_ENV
         shell: bash
