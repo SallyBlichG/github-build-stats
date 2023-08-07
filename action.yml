@@ -43,10 +43,10 @@ runs:
 
       - name: Pass Inputs to Shell
         run: |
-                echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
-                echo "GITHUB_REPOSITORY_ID=${{ inputs.GITHUB_REPOSITORY_ID }}" >> $GITHUB_ENV
-                echo "GITHUB_RUN_ID=${{ inputs.GITHUB_RUN_ID }}" >> $GITHUB_ENV
-                echo "GITHUB_ORG_ID=${{ inputs.GITHUB_ORG_ID }}" >> $GITHUB_ENV
+          echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
+          echo "GITHUB_REPOSITORY_ID=${{ inputs.GITHUB_REPOSITORY_ID }}" >> $GITHUB_ENV
+          echo "GITHUB_RUN_ID=${{ inputs.GITHUB_RUN_ID }}" >> $GITHUB_ENV
+          echo "GITHUB_ORG_ID=${{ inputs.GITHUB_ORG_ID }}" >> $GITHUB_ENV
         shell: bash
 
       - name: Run python script, action stats

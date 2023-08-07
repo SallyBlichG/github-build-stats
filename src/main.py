@@ -18,10 +18,10 @@ def main():
                      f"/repos/{os.getenv('GITHUB_ORG_ID')}/{os.getenv('GITHUB_REPOSITORY_ID')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}/jobs",
                      payload, headers)
         res = conn.getresponse()
-        logging.debug(res)
+        print(res)
         data = res.read()
         obj = json.loads(data.decode("utf-8"))
-        logging.debug(obj)
+        print(obj)
         datetime_format = "%Y-%m-%dT%H:%M:%SZ"
         for row in obj['jobs']:
             datetime_obj1 = datetime.strptime(row['started_at'], datetime_format)
