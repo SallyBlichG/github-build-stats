@@ -15,7 +15,7 @@ inputs:
     required: true
     default: ${{ github.repository_id }}
   GITHUB_RUN_ID:
-    description: 'The run id\number that we wish to get stats from'
+    description: 'The run id that we wish to get stats from'
     required: true
     default: ${{ github.run_id }}
 

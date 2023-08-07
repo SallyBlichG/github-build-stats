@@ -7,6 +7,7 @@ import os
 def main():
     try:
         conn = http.client.HTTPSConnection("api.github.com")
+        http.client.HTTPSConnection.debuglevel = 1
         payload = ''
         headers = {
             'Accept': 'application/vnd.github.v3+json',
