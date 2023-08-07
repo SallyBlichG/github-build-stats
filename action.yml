@@ -13,7 +13,7 @@ inputs:
   GITHUB_REPOSITORY_ID:
     description: 'The repo id that we with to get stats from its workflow'
     required: true
-    default: ${{ github.repository_id }}
+    default: ${{ github.event.repository.name }}
   GITHUB_RUN_ID:
     description: 'The run id that we wish to get stats from'
     required: true
