@@ -22,20 +22,14 @@ def main():
         obj = json.loads(data.decode("utf-8"))
         datetime_format = "%Y-%m-%dT%H:%M:%S.%f%z"
         for row in obj['jobs']:
-            print(len(row['steps']))
-            print(row['steps'])
             for step in range(len(row['steps'])):
                 if row['steps'][step]['status'] == "completed":
-                    print(row['steps'][step]['started_at'])
-                    print(row['steps'][step]['completed_at'])
                     datetime_obj1 = datetime.strptime(row['steps'][step]['started_at'], datetime_format)
                     datetime_obj2 = datetime.strptime(row['steps'][step]['completed_at'], datetime_format)
                     time_difference = datetime_obj2 - datetime_obj1
-                    print(datetime_obj1, datetime_obj2)
-                    print(time_difference)
                     if time_difference.total_seconds() != 0.0:
                         print(row['steps'][step]["name"])
-                        print(f"::set-output name=output::This step took: {time_difference.total_seconds()} seconds.")
+                        print(f"This step took: {time_difference.total_seconds()} seconds.")
 
     except Exception as e:
         print("An exception occurred:", e)
