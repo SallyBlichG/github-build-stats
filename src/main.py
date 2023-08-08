@@ -20,16 +20,17 @@ def main():
         res = conn.getresponse()
         data = res.read()
         obj = json.loads(data.decode("utf-8"))
-        print("obj:", obj)
         datetime_format = "%Y-%m-%dT%H:%M:%SZ"
         for row in obj['jobs']:
-            print("row:", row)
-            datetime_obj1 = datetime.strptime(row['started_at'], datetime_format)
-            datetime_obj2 = datetime.strptime(row['completed_at'], datetime_format)
-            time_difference = datetime_obj2 - datetime_obj1
-            if time_difference.total_seconds() != 0.0:
-                print(row['name'])
-                print(f"::set-output name=output::This step took: {time_difference.total_seconds()} seconds.")
+            print(datetime_format)
+            print(row['started_at'])
+            print(row['completed_at'])
+            # datetime_obj1 = datetime.strptime(row['started_at'], datetime_format)
+            # datetime_obj2 = datetime.strptime(row['completed_at'], datetime_format)
+            # time_difference = datetime_obj2 - datetime_obj1
+            # if time_difference.total_seconds() != 0.0:
+            #     print(row['name'])
+            #     print(f"::set-output name=output::This step took: {time_difference.total_seconds()} seconds.")
 
     except Exception as e:
         print("An exception occurred:", e)

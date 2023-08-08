@@ -18,7 +18,6 @@ inputs:
     description: 'The run id that we wish to get stats from'
     required: true
     default: ${{ github.run_id }}
-
 outputs:
   output:
     value:
