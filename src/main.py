@@ -25,14 +25,15 @@ def main():
             print(len(row['steps']))
             print(row['steps'])
             for step in range(len(row['steps'])):
-                print(row['steps'][step]['started_at'])
-                print(row['steps'][step]['completed_at'])
-            # datetime_obj1 = datetime.strptime(row['started_at'], datetime_format)
-            # datetime_obj2 = datetime.strptime(row['completed_at'], datetime_format)
-            # time_difference = datetime_obj2 - datetime_obj1
-            # if time_difference.total_seconds() != 0.0:
-            #     print(row['name'])
-            #     print(f"::set-output name=output::This step took: {time_difference.total_seconds()} seconds.")
+                if row['steps'][step]['status'] != "pending":
+                    print(row['steps'][step]['started_at'])
+                    print(row['steps'][step]['completed_at'])
+                    datetime_obj1 = datetime.strptime(row['steps'][step]['started_at'], datetime_format)
+                    datetime_obj2 = datetime.strptime(row['steps'][step]['completed_at'], datetime_format)
+                    time_difference = datetime_obj2 - datetime_obj1
+                    if time_difference.total_seconds() != 0.0:
+                        print(row['name'])
+                        print(f"::set-output name=output::This step took: {time_difference.total_seconds()} seconds.")
 
     except Exception as e:
         print("An exception occurred:", e)
