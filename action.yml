@@ -41,7 +41,7 @@ runs:
           python-version: '3.10'
 
       - name: Get VALGRIND_VERSION
-        id: get-stats
+        id: get-valgrind-version
         run: echo "VALGRIND_VERSION=$(apt-cache policy valgrind | grep -oP '(?<=Candidate:\s)(.+)')" >> "$GITHUB_ENV"
         shell: bash
 
