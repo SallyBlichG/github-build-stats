@@ -31,8 +31,10 @@ def main():
                     datetime_obj1 = datetime.strptime(row['steps'][step]['started_at'], datetime_format)
                     datetime_obj2 = datetime.strptime(row['steps'][step]['completed_at'], datetime_format)
                     time_difference = datetime_obj2 - datetime_obj1
+                    print(datetime_obj1, datetime_obj2)
+                    print(time_difference)
                     if time_difference.total_seconds() != 0.0:
-                        print(row['name'])
+                        print(row['steps'][step]["name"])
                         print(f"::set-output name=output::This step took: {time_difference.total_seconds()} seconds.")
 
     except Exception as e:
