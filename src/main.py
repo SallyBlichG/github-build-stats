@@ -6,7 +6,7 @@ import requests
 
 def main():
     try:
-        url = f"/repos/{os.getenv('GITHUB_ORG_ID')}/{os.getenv('GITHUB_REPOSITORY_NAME')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}/jobs"
+        url = f"https://api.github.com/repos/{os.getenv('GITHUB_ORG_ID')}/{os.getenv('GITHUB_REPOSITORY_NAME')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}/jobs"
         payload = {}
         headers = {
             'Accept': 'application/vnd.github.v3+json',
