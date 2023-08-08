@@ -20,12 +20,12 @@ def main():
         res = conn.getresponse()
         data = res.read()
         obj = json.loads(data.decode("utf-8"))
-        datetime_format = "%Y-%m-%dT%H:%M:%SZ"
+        datetime_format = "%Y-%m-%dT%H:%M:%S.%f%z"
         for row in obj['jobs']:
             print(len(row['steps']))
             print(row['steps'])
             for step in range(len(row['steps'])):
-                if row['steps'][step]['status'] != "pending":
+                if row['steps'][step]['status'] == "completed":
                     print(row['steps'][step]['started_at'])
                     print(row['steps'][step]['completed_at'])
                     datetime_obj1 = datetime.strptime(row['steps'][step]['started_at'], datetime_format)
