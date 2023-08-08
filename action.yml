@@ -27,6 +27,9 @@ inputs:
   BQ_TABLE:
     description: 'Big query table'
     required: true
+  GCP_SERVICE_ACCOUNT:
+    description: 'Your google service account, to connect to google cloud'
+    required: true
 outputs:
   output:
     value:
@@ -97,7 +100,7 @@ runs:
       - name: GCP Connection
         shell: bash
         run: |
-          echo '${{ secrets.GCP_SERVICE_ACCOUNT }}' > client-secret.json
+          echo '${{ inputs.GCP_SERVICE_ACCOUNT }}' > client-secret.json
           gcloud auth activate-service-account --key-file=client-secret.json
           gcloud config set project ${{ env.GOOGLE_PROJECT_NAME }}
 
