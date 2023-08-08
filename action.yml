@@ -18,6 +18,15 @@ inputs:
     description: 'The run id that we wish to get stats from'
     required: true
     default: ${{ github.run_id }}
+  GOOGLE_PROJECT_NAME:
+    description: 'Google project name'
+    required: true
+  BQ_DATASET:
+    description: 'Big query dataset'
+    required: true
+  BQ_TABLE:
+    description: 'Big query table'
+    required: true
 outputs:
   output:
     value:
@@ -46,6 +55,9 @@ runs:
           echo "GITHUB_REPOSITORY_NAME=${{ inputs.GITHUB_REPOSITORY_NAME }}" >> $GITHUB_ENV
           echo "GITHUB_RUN_ID=${{ inputs.GITHUB_RUN_ID }}" >> $GITHUB_ENV
           echo "GITHUB_ORG_ID=${{ inputs.GITHUB_ORG_ID }}" >> $GITHUB_ENV
+          echo "GOOGLE_PROJECT_NAME=${{ inputs.GOOGLE_PROJECT_NAME }}" >> $GITHUB_ENV
+          echo "BQ_DATASET=${{ inputs.BQ_DATASET }}" >> $GITHUB_ENV
+          echo "BQ_TABLE=${{ inputs.BQ_TABLE }}" >> $GITHUB_ENV
         shell: bash
 
       - name: Run python script, action stats
