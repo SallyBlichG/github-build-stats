@@ -40,13 +40,47 @@ runs:
         with:
           python-version: '3.10'
 
+      - name: Get VALGRIND_VERSION
+        id: get-stats
+        run: echo "VALGRIND_VERSION=$(apt-cache policy valgrind | grep -oP '(?<=Candidate:\s)(.+)')" >> "$GITHUB_ENV"
+        shell: bash
+
+      - name: Cache valgrind
+        uses: actions/cache@v3
+        id: cache-valgrind
+        with:
+            path: "~/valgrind"
+            key: ${{ env.VALGRIND_VERSION }}
+
+      - name: Install valgrind
+        env:
+          CACHE_HIT: ${{ steps.cache-valgrind.outputs.cache-hit }}
+          VALGRIND_VERSION: ${{ env.VALGRIND_VERSION }}
+        shell:
+        run: |
+            if [[ "$CACHE_HIT" == 'true' ]]; then
+              sudo cp --verbose --force --recursive ~/valgrind/* /
+            else
+              sudo apt-get install --yes valgrind="${{ env.VALGRIND_VERSION }}"
+              mkdir -p ~/valgrind
+              sudo dpkg -L valgrind | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/valgrind/
+            fi
+
       - uses: actions/checkout@v3
         with:
           repository: 'SallyBlichG/github-build-stats'
           ref: 'main'
 
+      - uses: actions/cache@v3
+        id: cache-venv
+        with:
+          path: ./.venv/
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
+
       - name: Install Dependencies
-        run: sudo apt install libcurl4-openssl-dev libssl-dev && pip install -r requirements.txt
+        run: sudo apt install libcurl4-openssl-dev libssl-dev
         shell: bash
 
       - name: Pass Inputs to Shell
@@ -62,5 +96,5 @@ runs:
 
       - name: Run python script, action stats
         id: get-stats
-        run: python src/main.py
+        run: python -m venv ./.venv && . ./.venv/bin/activate && pip install -r requirements.txt && python src/main.py
         shell: bash
