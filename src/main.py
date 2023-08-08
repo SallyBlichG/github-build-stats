@@ -22,9 +22,9 @@ def main():
         obj = json.loads(data.decode("utf-8"))
         datetime_format = "%Y-%m-%dT%H:%M:%SZ"
         for row in obj['jobs']:
-            print(datetime_format)
-            print(row['started_at'])
-            print(row['completed_at'])
+            print(row['steps'])
+            print(row['steps']['started_at'])
+            print(row['steps']['completed_at'])
             # datetime_obj1 = datetime.strptime(row['started_at'], datetime_format)
             # datetime_obj2 = datetime.strptime(row['completed_at'], datetime_format)
             # time_difference = datetime_obj2 - datetime_obj1
