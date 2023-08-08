@@ -94,6 +94,13 @@ runs:
           echo "BQ_TABLE=${{ inputs.BQ_TABLE }}" >> $GITHUB_ENV
         shell: bash
 
+      - name: GCP Connection
+        shell: bash
+        run: |
+          echo '${{ secrets.GCP_SERVICE_ACCOUNT }}' > client-secret.json
+          gcloud auth activate-service-account --key-file=client-secret.json
+          gcloud config set project ${{ env.GOOGLE_PROJECT_NAME }}
+
       - name: Run python script, action stats
         id: get-stats
         run: python -m venv ./.venv && . ./.venv/bin/activate && pip install -r requirements.txt && python src/main.py
