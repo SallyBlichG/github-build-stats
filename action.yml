@@ -96,7 +96,7 @@ runs:
           echo "BQ_DATASET=${{ inputs.BQ_DATASET }}" >> $GITHUB_ENV
           echo "BQ_TABLE=${{ inputs.BQ_TABLE }}" >> $GITHUB_ENV
           echo '${{ inputs.GOOGLE_APPLICATION_CREDENTIALS }}' > client-secret.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}\client-secret.json" >> $GITHUB_ENV
+          echo "GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}/client-secret.json" >> $GITHUB_ENV
         shell: bash
 
       - name: Run python script, action stats
