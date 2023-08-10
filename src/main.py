@@ -2,7 +2,6 @@ import http.client
 import json
 import os
 from datetime import datetime
-import pytz
 from google.cloud import bigquery
 
 
