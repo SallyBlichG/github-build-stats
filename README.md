@@ -1,4 +1,4 @@
-# Github Build Stats: Gather Github action stats and push it to BigQuery
+# Github Build Stats: Gather action stats & push it to BigQuery
 
 This GitHub Action automates the process of gathering statistics from a specific run and pushing the collected data to a Google BigQuery table.
 
