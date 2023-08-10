@@ -39,7 +39,7 @@ def getBuildStatsGithub():
                     if time_difference.total_seconds() != 0.0:
                         print(row['steps'][step]["name"])
                         print(f"This step took: {time_difference.total_seconds()} seconds")
-                        data = {'timestamp': (datetime_obj1.astimezone(pytz.timezone("UTC+3")).isoformat()),
+                        data = {'timestamp': (datetime_obj1.astimezone(pytz.timezone("Asia/Jerusalem")).isoformat()),
                                 'workflow_name': workflow_name, 'job_name': job_name,
                                 'step_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds()}
                         json_object.append(data)
