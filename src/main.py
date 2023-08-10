@@ -29,6 +29,7 @@ def getBuildStatsGithub():
         for row in obj['jobs']:
             workflow_name = row['workflow_name']
             job_name = (row['name']).replace("\\", "")
+            url = row['html_url']
             for step in range(len(row['steps'])):
                 if row['steps'][step]['status'] == "completed":
                     datetime_obj1 = datetime.strptime(row['steps'][step]['started_at'], datetime_format)
@@ -39,7 +40,7 @@ def getBuildStatsGithub():
                         print(f"This step took: {time_difference.total_seconds()} seconds")
                         data = {'timestamp': (datetime_obj1.isoformat()),
                                 'workflow_name': workflow_name, 'job_name': job_name,
-                                'step_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds()}
+                                'step_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds(), 'url': url}
                         json_object.append(data)
         writeStatsToBQ(json_object)
     except Exception as e:
