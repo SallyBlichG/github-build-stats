@@ -46,7 +46,7 @@ def getBuildStatsGithub():
 
 def writeStatsToBQ(json_object):
     try:
-        client = bigquery.Client()
+        client = bigquery.Client.from_service_account_json(os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
         table_id = f"{os.getenv('GOOGLE_PROJECT_NAME')}.{os.getenv('BQ_DATASET')}.{os.getenv('BQ_TABLE')}"
         errors = client.insert_rows_json(table_id, json_object)
         if not errors:

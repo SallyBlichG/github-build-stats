@@ -27,8 +27,8 @@ inputs:
   BQ_TABLE:
     description: 'Big query table'
     required: true
-  GCP_SERVICE_ACCOUNT:
-    description: 'Your google service account, to connect to google cloud'
+  GOOGLE_APPLICATION_CREDENTIALS:
+    description: 'Your google credentials, should be the service account'
     required: true
 outputs:
   output:
@@ -95,14 +95,9 @@ runs:
           echo "GOOGLE_PROJECT_NAME=${{ inputs.GOOGLE_PROJECT_NAME }}" >> $GITHUB_ENV
           echo "BQ_DATASET=${{ inputs.BQ_DATASET }}" >> $GITHUB_ENV
           echo "BQ_TABLE=${{ inputs.BQ_TABLE }}" >> $GITHUB_ENV
+          echo '${{ inputs.GOOGLE_APPLICATION_CREDENTIALS }}' > client-secret.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}\client-secret.json" >> $GITHUB_ENV
         shell: bash
-
-      - name: GCP Connection
-        shell: bash
-        run: |
-          echo '${{ inputs.GCP_SERVICE_ACCOUNT }}' > client-secret.json
-          gcloud auth activate-service-account --key-file=client-secret.json
-          gcloud config set project ${{ env.GOOGLE_PROJECT_NAME }}
 
       - name: Run python script, action stats
         id: get-stats
