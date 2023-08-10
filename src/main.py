@@ -36,7 +36,7 @@ def getBuildStatsGithub():
                     if time_difference.total_seconds() != 0.0:
                         print(row['steps'][step]["name"])
                         print(f"This step took: {time_difference.total_seconds()} seconds")
-                        data = {'timestamp': datetime.strptime(row['steps'][step]['started_at'], datetime_format), 'job_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds()}
+                        data = {'timestamp': (datetime.strptime(row['steps'][step]['started_at'], datetime_format).isoformat()), 'job_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds()}
                         json_object.append(data)
         writeStatsToBQ(json_object)
     except Exception as e:
