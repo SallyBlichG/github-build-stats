@@ -5,7 +5,7 @@ branding:
   color: green
 inputs:
   GITHUB_TOKEN:
-    description: 'Github token to access the build stats. repo access should be good enough '
+    description: 'Github token to access the build stats. Repo access should be good enough'
     required: true
   GITHUB_ORG_ID:
     description: 'The organization id where your repository is located. It might be your username, company name, etc'
@@ -30,10 +30,6 @@ inputs:
   GOOGLE_APPLICATION_CREDENTIALS:
     description: 'Your google credentials, should be the service account'
     required: true
-outputs:
-  output:
-    value:
-    description: "Output from the action"
 
 runs:
   using: 'composite'
