@@ -2,6 +2,8 @@ import http.client
 import json
 import os
 from datetime import datetime
+
+import pytz
 from google.cloud import bigquery
 
 
@@ -28,6 +30,8 @@ def getBuildStatsGithub():
         datetime_format = "%Y-%m-%dT%H:%M:%S.%f%z"
         json_object = []
         for row in obj['jobs']:
+            workflow_name = row['workflow_name']
+            job_name = (row['name']).replace("\\", "")
             for step in range(len(row['steps'])):
                 if row['steps'][step]['status'] == "completed":
                     datetime_obj1 = datetime.strptime(row['steps'][step]['started_at'], datetime_format)
@@ -36,7 +40,9 @@ def getBuildStatsGithub():
                     if time_difference.total_seconds() != 0.0:
                         print(row['steps'][step]["name"])
                         print(f"This step took: {time_difference.total_seconds()} seconds")
-                        data = {'timestamp': (datetime.strptime(row['steps'][step]['started_at'], datetime_format).isoformat()), 'job_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds()}
+                        data = {'timestamp': (datetime_obj1.astimezone(pytz.timezone("UTC+3"))).isoformat(),
+                                'workflow_name': workflow_name, 'job_name': job_name,
+                                'step_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds()}
                         json_object.append(data)
         writeStatsToBQ(json_object)
     except Exception as e:
@@ -50,7 +56,7 @@ def writeStatsToBQ(json_object):
         table_id = f"{os.getenv('GOOGLE_PROJECT_NAME')}.{os.getenv('BQ_DATASET')}.{os.getenv('BQ_TABLE')}"
         errors = client.insert_rows_json(table_id, json_object)
         if not errors:
-            print("New rows have been added for Datadog Source.")
+            print("New rows have been added")
         else:
             print("Encountered errors while inserting rows: {}".format(errors))
 
