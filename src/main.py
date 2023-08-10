@@ -13,7 +13,6 @@ def main():
 def getBuildStatsGithub():
     try:
         conn = http.client.HTTPSConnection("api.github.com")
-        # http.client.HTTPSConnection.debuglevel = 1
         payload = ''
         headers = {
             'Accept': 'application/vnd.github.v3+json',
@@ -39,7 +38,7 @@ def getBuildStatsGithub():
                     if time_difference.total_seconds() != 0.0:
                         print(row['steps'][step]["name"])
                         print(f"This step took: {time_difference.total_seconds()} seconds")
-                        data = {'timestamp': (datetime_obj1.astimezone(pytz.timezone("Asia/Jerusalem")).isoformat()),
+                        data = {'timestamp': (datetime_obj1.isoformat()),
                                 'workflow_name': workflow_name, 'job_name': job_name,
                                 'step_name': row['steps'][step]["name"], 'total_time': time_difference.total_seconds()}
                         json_object.append(data)
