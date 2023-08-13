@@ -54,3 +54,9 @@ All inputs are required!
 `GOOGLE_PROJECT_NAME`: Google project name (GCP)
 
 `GOOGLE_APPLICATION_CREDENTIALS`: Google credentials (GCP), should be the service account
+
+## Contributions
+
+This project is using [Valgrind](https://valgrind.org/) for caching APT packages in GitHub Actions workflow.
+Valgrind is an instrumentation framework for building dynamic analysis tools. It can detect memory leaks and threading bugs, which are common in C and C++ programs.
+
