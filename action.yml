@@ -1,4 +1,4 @@
-name: Github build stats
+name: Github Actions Build Stats
 description: "Get Build Stats in GitHub Actions workflow."
 branding:
   icon: check-circle
