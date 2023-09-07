@@ -97,5 +97,6 @@ runs:
 
       - name: Run python script, action stats
         id: get-stats
-        run: python -m venv ./.venv && . ./.venv/bin/activate && pip install -r requirements.txt && python src/main.py
+        #run: python -m venv ./.venv && . ./.venv/bin/activate && pip install -r requirements.txt && python src/main.py
+        run: python3 --version | . ./.venv/bin/activate && pip install -r requirements.txt && python src/main.py
         shell: bash
